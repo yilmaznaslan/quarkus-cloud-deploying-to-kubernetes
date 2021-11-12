@@ -1,0 +1,18 @@
+quarkus:
+  http:
+    port: 9090
+  package:
+    type: jar
+  container-image:
+    builder: docker
+    registery: docker.io
+    group: yilmaznaslan
+    name: quarkus-${quarkus.application.name:unset}
+    tag: ${quarkus.application.version:latest}
+    build: true
+    push: true
+  kubernetes:
+    image-pull-policy: always # ifNotPresent
+    service-type: NodePort #ClusterIp, NodePort
+    namespace: default
+    replicas: 1
